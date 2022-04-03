@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+body {
+    margin: 0;
+    background-color: #181515;
+    font-family: "VT323", sans-serif;
+}
+
+.main-game {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+.start {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    border: none;
+    background-color: #ff0000;
+    box-shadow: 0 0 5px black;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    letter-spacing: 5px;
+    font-family: "VT323";
+}
+
+.controls p {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    border: none;
+    background-color: #ff0000;
+    box-shadow: 0 0 5px black;
+    color: white;
+    letter-spacing: 5px;
+}
+
+.genius {
+    display: grid;
+    grid-template-areas: 'verde vermelho' 'amarelo azul';
+    grid-gap: 20px;
+    border: 20px solid black;
+    background-color: black;
+    border-radius: 100%;
+    width: 500px;
+    height: 500px;
+}
+
+.blue {
+    grid-area: azul;
+    background-color: blue;
+    border-bottom-right-radius: 100%;
+}
+
+.red {
+    grid-area: vermelho;
+    background-color: red;
+    border-top-right-radius: 100%;
+}
+
+.yellow {
+    grid-area: amarelo;
+    background-color: yellow;
+    border-bottom-left-radius: 100%;
+}
+
+.green {
+    grid-area: verde;
+    background-color: green;
+    border-top-left-radius: 100%;
+}
+
+.selected {
+    opacity: 0.4;
+}
+
+@media screen and (max-width: 520px) {
+    .genius {
+      width: 90%;
+      height: 350px;
+    }
+  }
