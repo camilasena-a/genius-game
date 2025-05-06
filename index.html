@@ -4,23 +4,76 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'genius-blue': '#00FFFF', // Ciano neon
+                        'genius-red': '#FF003C', // Vermelho neon
+                        'genius-yellow': '#FFD700', // Dourado neon
+                        'genius-green': '#39FF14', // Verde neon
+                        'genius-background': '#0D0221', // Roxo escuro profundo
+                        'genius-accent': '#FF00FF', // Magenta neon
+                        'genius-secondary': '#121212', // Preto para contraste
+                        'genius-highlight': '#8A2BE2', // Violeta neon
+                    },
+                    fontFamily: {
+                        'vt323': ['"VT323"', 'monospace'],
+                    },
+                    boxShadow: {
+                        'neon-blue': '0 0 5px #00FFFF, 0 0 10px #00FFFF',
+                        'neon-red': '0 0 5px #FF003C, 0 0 10px #FF003C',
+                        'neon-yellow': '0 0 5px #FFD700, 0 0 10px #FFD700',
+                        'neon-green': '0 0 5px #39FF14, 0 0 10px #39FF14',
+                        'neon-magenta': '0 0 5px #FF00FF, 0 0 10px #FF00FF',
+                    },
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
     <title>Genius</title>
 </head>
-<body>
-    <div class="main-game">
-        <div class="controls">
-            <button class="start">START</button>
-            <p>SCORE:<span class="score">0</span></p>
+<body class="m-0 bg-genius-background font-vt323">
+    <div class="h-screen w-screen flex flex-col justify-center items-center gap-8" style="background-image: radial-gradient(circle at center, rgba(138, 43, 226, 0.2) 0%, rgba(13, 2, 33, 0.8) 70%);">
+        <div class="flex gap-4 items-center">
+            <button class="start py-2 px-4 rounded-full border border-genius-accent bg-genius-secondary shadow-neon-magenta text-genius-accent hover:bg-genius-accent hover:text-genius-secondary cursor-pointer text-base tracking-widest font-vt323 transition-all duration-300">START</button>
+            <p class="py-2 px-4 rounded-full border border-genius-accent bg-genius-secondary shadow-neon-magenta text-genius-accent tracking-widest">SCORE:<span class="score">0</span></p>
         </div>
-        <div class="genius">
-            <div data-id="3" class="color blue"></div>
-            <div data-id="2" class="color yellow"></div>
-            <div data-id="1" class="color red"></div>
-            <div data-id="0" class="color green"></div>
+        <div class="genius grid grid-cols-2 gap-5 border-8 border-genius-secondary bg-genius-secondary rounded-full w-[400px] h-[400px] md:w-[400px] md:h-[400px] sm:w-[300px] sm:h-[300px]">
+            <div data-id="0" class="color green bg-genius-green rounded-tl-full shadow-neon-green hover:brightness-110 transition-all duration-300"></div>
+            <div data-id="1" class="color red bg-genius-red rounded-tr-full shadow-neon-red hover:brightness-110 transition-all duration-300"></div>
+            <div data-id="2" class="color yellow bg-genius-yellow rounded-bl-full shadow-neon-yellow hover:brightness-110 transition-all duration-300"></div>
+            <div data-id="3" class="color blue bg-genius-blue rounded-br-full shadow-neon-blue hover:brightness-110 transition-all duration-300"></div>
+        </div>
+        <h1 class="text-genius-accent text-2xl tracking-widest font-vt323 mt-4 shadow-neon-magenta">CYBER GENIUS</h1>
+        <footer class="absolute bottom-4 text-genius-accent text-sm tracking-wider font-vt323">
+            <p class="border-t border-genius-accent pt-2 px-4">Developed by <a href="https://github.com/camilasena-a" style="color: #ffffff; text-shadow: 0 0 1px #121212, 0 0 2px #121212">Camila Sena</a></p>
+        </footer>
+    </div>
+    
+    <!-- Modal de Game Over -->
+    <div id="gameOverModal" class="fixed inset-0 flex items-center justify-center hidden z-50">
+        <div class="modal-backdrop fixed inset-0 bg-black bg-opacity-70"></div>
+        <div class="modal-content bg-genius-secondary border-2 border-genius-red p-6 rounded-lg shadow-neon-red relative z-10 max-w-md w-full mx-4">
+            <div class="glitch-effect text-center">
+                <h2 class="text-genius-red text-3xl font-vt323 mb-4 tracking-widest">GAME OVER</h2>
+            </div>
+            <p class="text-white text-xl font-vt323 mb-6 text-center">You lost the game!</p>
+            <div class="score-container flex items-center justify-center gap-4 mb-6">
+                <p class="text-genius-accent font-vt323 text-lg">FINAL SCORE:</p>
+                <span id="finalScore" class="text-genius-yellow text-2xl font-vt323">0</span>
+            </div>
+            <div class="text-center">
+                <button id="restartButton" class="py-2 px-8 rounded-full border border-genius-green bg-genius-secondary shadow-neon-green text-genius-green hover:bg-genius-green hover:text-genius-secondary cursor-pointer text-lg tracking-widest font-vt323 transition-all duration-300">RESET</button>
+            </div>
         </div>
     </div>
+    
     <script src="javascript/script.js"></script>
 </body>
 </html>

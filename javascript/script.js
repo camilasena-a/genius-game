@@ -10,6 +10,10 @@ const yellowEl = document.querySelector(".yellow");
 const blueEl = document.querySelector(".blue");
 const startBtn = document.querySelector(".start");
 const scoreDisplay = document.querySelector(".score");
+const gameOverModal = document.getElementById("gameOverModal");
+const finalScoreDisplay = document.getElementById("finalScore");
+const restartButton = document.getElementById("restartButton");
+const modalContent = document.querySelector(".modal-content");
 
 let playing = false;
 let gameSequence = [];
@@ -75,12 +79,30 @@ function startGame() {
 }
 
 function lose() {
-  alert("Você perdeu o jogo, recomece!");
+  // Exibir o modal em vez do alerta
+  finalScoreDisplay.textContent = score;
+  gameOverModal.classList.remove("hidden");
+  setTimeout(() => {
+    modalContent.classList.add("show");
+  }, 100);
+  
   gameSequence = [];
   playerSequence = [];
   playing = false;
-  score = 0;
-  displayScore();
+  
+  // Não resetar o score imediatamente para mostrar no modal
+  // O score será resetado ao reiniciar o jogo
+}
+
+function resetGame() {
+  // Esconder o modal
+  modalContent.classList.remove("show");
+  setTimeout(() => {
+    gameOverModal.classList.add("hidden");
+    // Resetar o score após fechar o modal
+    score = 0;
+    displayScore();
+  }, 300);
 }
 
 function changePadCursor(cursorType) {
@@ -120,3 +142,11 @@ pads.forEach((pad) => {
 });
 
 startBtn.addEventListener("click", startGame);
+restartButton.addEventListener("click", function() {
+  resetGame();
+  // Iniciar um novo jogo após um breve delay
+  setTimeout(startGame, 500);
+});
+
+// Fechar modal clicando no backdrop
+document.querySelector(".modal-backdrop").addEventListener("click", resetGame);
